@@ -1,0 +1,9 @@
+<h1>Bem vindo ao hotel vitor e alvaro</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+<h1>Quartos</h1>
+
+<div >
+  <% @quartos.each do |quarto| %>
+    <%= render partial: "quartos", locals: { quarto: quarto } %>
+  <% end %>
+</div>

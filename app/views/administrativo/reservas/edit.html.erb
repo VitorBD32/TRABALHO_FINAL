@@ -1,0 +1,10 @@
+<h1>Editing reserva</h1>
+
+<%= render "form", reserva: @reserva %>
+
+<br>
+
+<div>
+  <%= link_to "Show this reserva", [:administrativo,@reserva]%> |
+  <%= link_to "Back to reservas", administrativo_reservas_path %>
+</div>
