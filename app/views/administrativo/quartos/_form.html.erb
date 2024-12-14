@@ -1,10 +1,10 @@
-<%= form_with(model: [:administrativo,quarto]) do |form| %>
-  <% if quarto.errors.any? %>
+<%= form_with(model: [:administrativo, @quarto]) do |form| %>
+  <% if @quarto.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(quarto.errors.count, "error") %> prohibited this quarto from being saved:</h2>
+      <h2><%= pluralize(@quarto.errors.count, "error") %> prohibited this quarto from being saved:</h2>
 
       <ul>
-        <% quarto.errors.each do |error| %>
+        <% @quarto.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -31,7 +31,13 @@
     <%= form.text_field :status %>
   </div>
 
+  <!-- Campo de Foto -->
   <div>
-    <%= form.submit %>
+    <%= form.label :foto, style: "display: block" %>
+    <%= form.file_field :foto %>
+  </div>
+
+  <div>
+    <%= form.submit "Criar Quarto" %>
   </div>
 <% end %>

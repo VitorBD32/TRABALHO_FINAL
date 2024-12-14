@@ -59,7 +59,11 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+gem "carrierwave", "~> 2.0"
 
+  gem "mini_magick"
+
+  gem "phony_rails"
 
 gem "devise", "~> 4.9"
 gem 'kaminari'

@@ -69,7 +69,8 @@ module Administrativo
 
       # Only allow a list of trusted parameters through.
       def quarto_params
-        params.require(:quarto).permit(:numero, :tipo, :preco, :status)
+        params.require(:quarto).permit(:numero, :tipo, :preco, :status, :foto)  # Permitir foto
+        
       end
   end
 end
