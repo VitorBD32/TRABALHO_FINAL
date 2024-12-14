@@ -1,12 +1,13 @@
 module Administrativo  
   class ReservasController < ApplicationController
     before_action :set_reserva, only: %i[ show edit update destroy ]
+    before_action :set_users, only: [:new, :edit, :show]
     before_action :authenticate_admin!
     layout "administrativo"
 
     # GET /reservas or /reservas.json
     def index
-      @reservas = Reserva.all
+      @reservas = Reserva.includes(:user).all
     end
 
     # GET /reservas/1 or /reservas/1.json
@@ -22,6 +23,8 @@ module Administrativo
     def edit
     end
 
+
+    
     # POST /reservas or /reservas.json
     def create
       @reserva = Reserva.new(reserva_params)
@@ -65,10 +68,14 @@ module Administrativo
       def set_reserva
         @reserva = Reserva.find(params[:id])
       end
-
+      
+      def set_users
+        @users = User.all
+      end
+  
       # Only allow a list of trusted parameters through.
       def reserva_params
-        params.require(:reserva).permit(:data_entrada, :data_saida, :valor_total, :status)
+        params.require(:reserva).permit(:data_entrada, :data_saida, :valor_total, :status, :user_id)
       end
   end
 end

@@ -2,7 +2,14 @@ Rails.application.routes.draw do
   devise_for :users
   devise_for :admins
   get 'welcome/index'
+
+  resources :reservas, only: [:index]
+
   
+  #Usuário tem várias reservas
+  #Uma reserva tem UM quarto
+
+
   namespace :administrativo do  
     resources :servicos
     resources :reservas

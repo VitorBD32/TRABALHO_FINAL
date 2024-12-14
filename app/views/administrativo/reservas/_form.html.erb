@@ -29,8 +29,14 @@
   <div>
     <%= form.label :status, style: "display: block" %>
     <%= form.text_field :status %>
+
+  </div>
+  <div>
+    <%= form.label :user_id, "Usuario", style: "display: block" %>
+    <%= form.select :user_id, options_from_collection_for_select(User.all, :id, :email, reserva.user_id) %>
   </div>
 
+  
   <div>
     <%= form.submit %>
   </div>

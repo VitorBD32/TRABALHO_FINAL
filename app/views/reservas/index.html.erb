@@ -1,0 +1,10 @@
+<% @reservas.each_with_index do |reserva, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= reserva.user.email %></td>
+          <td><%= reserva.data_entrada.strftime('%d/%m/%Y') %></td>
+          <td><%= reserva.data_saida.strftime('%d/%m/%Y') %></td>
+        <td><%= reserva.valor_total %></td>
+          <td><%= reserva.status %></td>
+        </tr>
+<% end %>
