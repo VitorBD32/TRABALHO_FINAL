@@ -1,11 +1,14 @@
-<div>
+<div class="mb-4">
   <p>
+    <strong>Status:</strong> <%= quarto.status %>
+  </p>
 
-    <strong>Status:</strong>
-    <%= quarto.status %>
-    <strong>Preço</strong>
-    <%= quarto.preco %>
-    <strong>Foto do Quarto:</strong>
-    <%= quarto.foto %>
-      </p>
- </div>
+  <p>
+    <strong>Preço:</strong> <%= number_to_currency(quarto.preco, unit: "R$", delimiter: ".", precision: 2) %>
+  </p>
+
+  <p>
+    <strong>Foto do Quarto:</strong> 
+    <%= image_tag quarto.foto.url, alt: "Foto do quarto", class: "img-fluid" if quarto.foto? %>
+  </p>
+</div>

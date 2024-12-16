@@ -1,15 +1,37 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-4">
 
-<h1>Quartos</h1>
-
-<div id="quartos">
-  <% @quartos.each do |quarto| %>
-    <%= render quarto %>
-    <p>
-      <%= link_to "Show this quarto", [:administrativo,quarto] %>
-    </p>
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
   <% end %>
-</div>
 
-<%= link_to "New quarto", new_administrativo_quarto_path %>
-<%= paginate @quartos %>
+
+  <h1 class="mb-4">Lista de Quartos</h1>
+
+
+  <div id="quartos" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% @quartos.each do |quarto| %>
+      <div class="col">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <%= render quarto %>
+            <div class="mt-3">
+              <%= link_to "Ver Detalhes", [:administrativo, quarto], class: "btn btn-primary btn-sm" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  
+  <div class="mt-4">
+    <%= paginate @quartos %>
+  </div>
+
+ 
+  <div class="mt-4 d-flex justify-content-between">
+    <%= link_to "Cadastrar Novo Quarto", new_administrativo_quarto_path, class: "btn btn-success" %>
+  </div>
+</div>

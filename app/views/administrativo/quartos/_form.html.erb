@@ -1,9 +1,9 @@
-<%= form_with(model: [:administrativo, @quarto]) do |form| %>
-  <% if @quarto.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@quarto.errors.count, "error") %> prohibited this quarto from being saved:</h2>
+<%= form_with(model: [:administrativo, @quarto], class: "needs-validation", novalidate: true) do |form| %>
 
-      <ul>
+  <% if @quarto.errors.any? %>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(@quarto.errors.count, "erro") %> impediram o quarto de ser salvo:</h4>
+      <ul class="mb-0">
         <% @quarto.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,33 +11,42 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :numero, style: "display: block" %>
-    <%= form.text_field :numero %>
+
+  <div class="mb-3">
+    <%= form.label :numero, class: "form-label" %>
+    <%= form.text_field :numero, class: "form-control", placeholder: "Número do quarto", required: true %>
   </div>
 
-  <div>
-    <%= form.label :tipo, style: "display: block" %>
-    <%= form.text_field :tipo %>
+  
+  <div class="mb-3">
+    <%= form.label :tipo, class: "form-label" %>
+    <%= form.select :tipo, [["Solteiro", "Solteiro"], ["Casal", "Casal"]], 
+                    { prompt: "Selecione o tipo de quarto" }, 
+                    class: "form-select", required: true %>
   </div>
 
-  <div>
-    <%= form.label :preco, style: "display: block" %>
-    <%= form.text_field :preco %>
+ 
+  <div class="mb-3">
+    <%= form.label :preco, class: "form-label" %>
+    <%= form.number_field :preco, class: "form-control", placeholder: "Preço por diária", step: "0.01", required: true %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+
+  <div class="mb-3">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status, [["Disponível", "Disponível"], ["Ocupado", "Ocupado"]], 
+                    { prompt: "Selecione o status do quarto" }, 
+                    class: "form-select", required: true %>
   </div>
 
-  <!-- Campo de Foto -->
-  <div>
-    <%= form.label :foto, style: "display: block" %>
-    <%= form.file_field :foto %>
+
+  <div class="mb-3">
+    <%= form.label :foto, class: "form-label" %>
+    <%= form.file_field :foto, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit "Criar Quarto" %>
+ 
+  <div class="d-grid gap-2">
+    <%= form.submit "Salvar Quarto", class: "btn btn-primary" %>
   </div>
 <% end %>

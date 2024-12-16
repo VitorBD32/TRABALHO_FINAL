@@ -1,22 +1,22 @@
-<div id="<%= dom_id quarto %>">
-  <p>
-    <strong>Numero:</strong>
-    <%= quarto.numero %>
-  </p>
+<div id="<%= dom_id(quarto) %>" class="card mb-3 shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Quarto <%= quarto.numero %></h5>
 
-  <p>
-    <strong>Tipo:</strong>
-    <%= quarto.tipo %>
-  </p>
+    <p class="card-text">
+      <strong>Tipo:</strong> <%= quarto.tipo %>
+    </p>
 
-  <p>
-    <strong>Preco:</strong>
-    <%= quarto.preco %>
-  </p>
+    <p class="card-text">
+      <strong>Preço:</strong> R$ <%= number_to_currency(quarto.preco, unit: "", separator: ",", delimiter: ".") %>
+    </p>
 
-  <p>
-    <strong>Status:</strong>
-    <%= quarto.status %>
-  </p>
-
+    <p class="card-text">
+      <strong>Status:</strong> 
+      <% if quarto.status == "Disponível" %>
+        <span class="badge bg-success"><%= quarto.status %></span>
+      <% else %>
+        <span class="badge bg-danger"><%= quarto.status %></span>
+      <% end %>
+    </p>
+  </div>
 </div>

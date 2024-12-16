@@ -1,27 +1,47 @@
-<h1>Bem vindo ao hotel vitor e alvaro</h1>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Bem-vindo ao Hotel AV</h1>
 
-<h1>Quartos</h1>
+  <div class="text-end mb-4">
+    <% if user_signed_in? %>
+      <span class="text-muted">Conectado: <%= current_user.email %></span>
+      <%= link_to  "Fazer Logoff", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-danger ms-2" %>
+    
+    <% else %>
+      <span class="text-muted">Desconectado</span>
+    <% end %>
+  </div>
 
-<%= link_to "Faça Login", user_session_path, class: "btn btn-new me-2" %>
+  <h2 class="mb-4">Quartos Disponíveis</h2>
 
-<div>
+ <div class="row g-4">
   <% @quartos.each do |quarto| %>
-    <div class="quarto">
-      <h3>Quarto Número: <%= quarto.numero %></h3>
-      <p>Status: <%= quarto.status %></p>
-      <p>Preço: R$ <%= quarto.preco %></p>
-
-      <% if quarto.foto? %>
-        <p>Foto do Quarto:</p>
-        <%= image_tag quarto.foto.url, alt: "Foto do Quarto #{quarto.numero}", class: "img-thumbnail" %>
-      <% else %>
-        <p>Sem foto disponível para este quarto.</p>
-      <% end %>
+    <% next unless quarto.status == "Disponível" %>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <% if quarto.foto? %>
+          <%= image_tag quarto.foto.url, alt: "Foto do Quarto #{quarto.numero}", class: "card-img-top img-fluid rounded" %>
+        <% else %>
+          <img src="https://via.placeholder.com/300x200?text=Sem+Foto" alt="Sem foto disponível" class="card-img-top img-fluid rounded">
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title">Quarto Número: <%= quarto.numero %></h5>
+          <p class="card-text">Status: <%= quarto.status %></p>
+          <p class="card-text">Preço: <strong>R$ <%= number_to_currency(quarto.preco, unit: "", separator: ",", delimiter: ".") %></strong></p>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
 
-<%= user_signed_in? ? "Conectado: #{current_user.email}" : "Desconectado" %>
-<%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
-  Fazer Logoff
-<% end %>
+
+  <div class="mt-5 d-flex justify-content-center">
+    <%= link_to "Exportar Quartos para CSV", root_path(format: :csv), class: "btn btn-success me-2" %>
+    <%= link_to "Exportar Quartos para PDF", root_path(format: :pdf), class: "btn btn-danger" %>
+  </div>
+</div>
+
+  <div class="mt-4">
+    <%= paginate @quartos %>
+  </div>
+
+

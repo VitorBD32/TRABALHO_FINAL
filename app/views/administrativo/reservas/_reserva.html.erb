@@ -1,11 +1,11 @@
-<div id="<%= dom_id reserva %>">
+<div id="<%= dom_id(reserva) %>">
   <p>
     <strong>Data entrada:</strong>
     <%= reserva.data_entrada %>
   </p>
 
   <p>
-    <strong>Data saida:</strong>
+    <strong>Data saída:</strong>
     <%= reserva.data_saida %>
   </p>
 
@@ -19,4 +19,9 @@
     <%= reserva.status %>
   </p>
 
+
+  <p>
+    <strong>Número do quarto:</strong>
+    <%= reserva.quarto.numero %> 
+  </p>
 </div>

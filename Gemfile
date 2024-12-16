@@ -67,3 +67,10 @@ gem "carrierwave", "~> 2.0"
 
 gem "devise", "~> 4.9"
 gem 'kaminari'
+gem 'prawn'
+gem 'csv'
+gem 'bootstrap', '~> 5.3.3'
+gem "sassc-rails"
+gem 'sass-rails'
+
+gem 'kaminari-bootstrap'

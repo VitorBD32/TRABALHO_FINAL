@@ -2,6 +2,7 @@ module Administrativo
   class ReservasController < ApplicationController
     before_action :set_reserva, only: %i[ show edit update destroy ]
     before_action :set_users, only: [:new, :edit, :show]
+    before_action :set_quartos, only: [:new, :edit] 
     before_action :authenticate_admin!
     layout "administrativo"
 
@@ -31,7 +32,7 @@ module Administrativo
 
       respond_to do |format|
         if @reserva.save
-          format.html { redirect_to [:administrativo, @reserva], notice: "Reserva was successfully created." }
+          format.html { redirect_to [:administrativo, @reserva], notice: "Reserva criado com sucesso" }
           format.json { render :show, status: :created, location: @reserva }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +45,7 @@ module Administrativo
     def update
       respond_to do |format|
         if @reserva.update(reserva_params)
-          format.html { redirect_to [:administrativo, @reserva], notice: "Reserva was successfully updated." }
+          format.html { redirect_to [:administrativo, @reserva], notice: "Reserva atualizada" }
           format.json { render :show, status: :ok, location: @reserva }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -58,7 +59,7 @@ module Administrativo
       @reserva.destroy!
 
       respond_to do |format|
-        format.html { redirect_to administrativo_reservas_path, status: :see_other, notice: "Reserva was successfully destroyed." }
+        format.html { redirect_to administrativo_reservas_path, status: :see_other, notice: "Reserva deletada com sucesso" }
         format.json { head :no_content }
       end
     end
@@ -72,10 +73,14 @@ module Administrativo
       def set_users
         @users = User.all
       end
+
+      def set_quartos
+        @quartos = Quarto.all
+      end
   
       # Only allow a list of trusted parameters through.
       def reserva_params
-        params.require(:reserva).permit(:data_entrada, :data_saida, :valor_total, :status, :user_id)
+        params.require(:reserva).permit(:data_entrada, :data_saida, :valor_total, :status, :user_id, :quarto_id)
       end
   end
 end

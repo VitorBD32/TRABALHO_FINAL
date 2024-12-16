@@ -1,2 +1,0 @@
-class Servico < ApplicationRecord
-end

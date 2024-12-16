@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_14_115746) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_15_171115) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -49,6 +49,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_14_115746) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.integer "quarto_id"
+    t.index ["quarto_id"], name: "index_reservas_on_quarto_id"
     t.index ["user_id"], name: "index_reservas_on_user_id"
   end
 
@@ -72,5 +74,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_14_115746) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "reservas", "quartos"
   add_foreign_key "reservas", "users"
 end

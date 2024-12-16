@@ -7,7 +7,7 @@ module Administrativo
 
     # GET /quartos or /quartos.json
     def index
-      @quartos = Quarto.page(params[:page]).per(2)
+      @quartos = Quarto.page(params[:page]).per(4)
     end
 
     # GET /quartos/1 or /quartos/1.json
@@ -29,7 +29,7 @@ module Administrativo
 
       respond_to do |format|
         if @quarto.save
-          format.html { redirect_to [:administrativo, @quarto], notice: "Quarto was successfully created." }
+          format.html { redirect_to [:administrativo, @quarto], notice: "Quarto criado com sucesso." }
           format.json { render :show, status: :created, location: @quarto }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ module Administrativo
     def update
       respond_to do |format|
         if @quarto.update(quarto_params)
-          format.html { redirect_to [:administrativo, @quarto], notice: "Quarto was successfully updated." }
+          format.html { redirect_to [:administrativo, @quarto], notice: "Quarto atualizado" }
           format.json { render :show, status: :ok, location: @quarto }
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -56,7 +56,7 @@ module Administrativo
       @quarto.destroy!
 
       respond_to do |format|
-        format.html { redirect_to administrativo_quartos_path, status: :see_other, notice: "Quarto was successfully destroyed." }
+        format.html { redirect_to administrativo_quartos_path, status: :see_other, notice: "Quarto deletado" }
         format.json { head :no_content }
       end
     end
@@ -69,7 +69,7 @@ module Administrativo
 
       # Only allow a list of trusted parameters through.
       def quarto_params
-        params.require(:quarto).permit(:numero, :tipo, :preco, :status, :foto)  # Permitir foto
+        params.require(:quarto).permit(:numero, :tipo, :preco, :status, :foto) 
         
       end
   end
